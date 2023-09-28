@@ -19,6 +19,29 @@ export enum LevelProduct {
   Professional = 'Профессиональный',
 }
 
+export const ActionsNames = {
+  LoadProductList: 'productsList/load',
+  CheckProductListStatus: 'productListStatus/check',
+} as const;
+
+export enum PageRoute {
+  Catalog = '/',
+}
+
+export enum RequestRoute {
+  Cameras = '/cameras',
+  Similar = '/similar',
+  Promo = '/promo',
+  Reviews = '/reviews',
+  Coupons = '/coupons',
+}
+
+export enum RequestStatus {
+  Pending = 'pending',
+  Idle = 'idle',
+  Success = 'success',
+  Reject = 'error',
+}
 
 export const BACKEND_URL = 'https://camera-shop.accelerator.pages.academy';
 

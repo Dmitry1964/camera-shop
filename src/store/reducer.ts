@@ -1,6 +1,8 @@
 import { createReducer } from '@reduxjs/toolkit';
 import { StoreType } from '../types/store-type';
-import { TypeProduct, CategoryProduct, LevelProduct } from '../constants/const';
+import { TypeProduct, CategoryProduct, LevelProduct, RequestStatus } from '../constants/const';
+import { loadProductsList } from './actions';
+import { fetchProductsList } from './api-actons';
 
 const initialState : StoreType = {
   productsList: [],
@@ -20,10 +22,26 @@ const initialState : StoreType = {
     previewImgWebp: '',
     previewImgWebp2x: '',
   },
-  similarProductList: []
+  similarProductList: [],
+  loadProductListStatys: RequestStatus.Idle,
 };
 
 const reducer = createReducer(initialState, (builder) => {
+
+  // загрузка списка продуктов
+  builder.addCase(loadProductsList, (state, action) => {
+    state.productsList = action.payload;
+  });
+  builder.addCase(fetchProductsList.pending, (state) => {
+    state.loadProductListStatys = RequestStatus.Pending;
+  });
+  builder.addCase(fetchProductsList.fulfilled, (state) => {
+    state.loadProductListStatys = RequestStatus.Success;
+  });
+  builder.addCase(fetchProductsList.rejected, (state) => {
+    state.loadProductListStatys = RequestStatus.Reject;
+  });
+
 
 });
 
