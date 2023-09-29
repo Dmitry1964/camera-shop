@@ -1,4 +1,4 @@
-import { StarsColor, FIVE_STARS } from '../../../constants/const';
+import { StarsColor, magicNumbers } from '../../../constants/const';
 
 type ProductCardRateProps = {
   rating: number;
@@ -7,21 +7,23 @@ type ProductCardRateProps = {
 
 const ProductCardRate = ({ rating, reviewCount }: ProductCardRateProps): JSX.Element => {
   const stars = [];
-  for (let i = 1; i <= FIVE_STARS; i++) {
+  for (let i = 1; i <= magicNumbers.fiveStars; i++) {
     stars.push(
       i <= rating ? StarsColor.Yellow : StarsColor.Gray
     );
   }
   return (
     <div className="rate product-card__rate">
-      {stars.map((item) => (
+      {stars.map((item, index) => (
         item === StarsColor.Yellow
           ?
-          <svg width="17" height="16" aria-hidden="true" key={item}>
+          // eslint-disable-next-line react/no-array-index-key
+          <svg width="17" height="16" aria-hidden="true" key={index}>
             <use xlinkHref="#icon-full-star"></use>
           </svg>
           :
-          <svg width="17" height="16" aria-hidden="true" key={item}>
+          // eslint-disable-next-line react/no-array-index-key
+          <svg width="17" height="16" aria-hidden="true" key={index}>
             <use xlinkHref="#icon-star"></use>
           </svg>
       ))}

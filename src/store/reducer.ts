@@ -1,10 +1,15 @@
 import { createReducer } from '@reduxjs/toolkit';
 import { StoreType } from '../types/store-type';
-import { TypeProduct, CategoryProduct, LevelProduct, RequestStatus } from '../constants/const';
-import { loadProductsList } from './actions';
+import {
+  TypeProduct,
+  CategoryProduct,
+  LevelProduct,
+  RequestStatus,
+} from '../constants/const';
+import { loadProductsList, changePageNumber } from './actions';
 import { fetchProductsList } from './api-actons';
 
-const initialState : StoreType = {
+const initialState: StoreType = {
   productsList: [],
   productItem: {
     id: 0,
@@ -24,10 +29,10 @@ const initialState : StoreType = {
   },
   similarProductList: [],
   loadProductListStatys: RequestStatus.Idle,
+  catalogPage: 1,
 };
 
 const reducer = createReducer(initialState, (builder) => {
-
   // загрузка списка продуктов
   builder.addCase(loadProductsList, (state, action) => {
     state.productsList = action.payload;
@@ -42,8 +47,10 @@ const reducer = createReducer(initialState, (builder) => {
     state.loadProductListStatys = RequestStatus.Reject;
   });
 
-
+  // смена страницы каталога
+  builder.addCase(changePageNumber, (state, action) => {
+    state.catalogPage = action.payload;
+  });
 });
 
-export {reducer};
-
+export { reducer };

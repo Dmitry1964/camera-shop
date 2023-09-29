@@ -5,3 +5,4 @@ import { ActionsNames } from '../constants/const';
 
 export const loadProductsList = createAction<ProductType[]>(ActionsNames.LoadProductList);
 export const checkLoadProductListStatus = createAction(ActionsNames.CheckProductListStatus);
+export const changePageNumber = createAction<number>(ActionsNames.ChangePageNumber);

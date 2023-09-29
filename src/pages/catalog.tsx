@@ -1,17 +1,28 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import Footer from '../components/footer/footer';
 import Header from '../components/header/header';
 import { useAppDispatch, useAppSelector } from '../hooks/hooks';
 import { fetchProductsList } from '../store/api-actons';
 import ProductCard from '../components/product-card/product-card';
 import Loader from '../components/loader/loader';
-import { RequestStatus } from '../constants/const';
+import { RequestStatus, magicNumbers } from '../constants/const';
+import PaginationList from '../components/UI/pagination-list/pagination-list';
 
 const Catalog = (): JSX.Element => {
 
   const dispatch = useAppDispatch();
   const loadStatus = useAppSelector((state) => state.loadProductListStatys);
   const products = useAppSelector((state) => state.productsList);
+
+
+  const [count, setCount] = useState({ start: 0, end: magicNumbers.cardsOnPage });
+  const handlePaginationItemClick = (evt : React.MouseEvent<HTMLAnchorElement>) => {
+    evt.preventDefault();
+    const numPage = parseInt(evt.target.textContent, 10);
+    setCount({...count, start: magicNumbers.cardsOnPage * (numPage-1), end: magicNumbers.cardsOnPage * numPage })
+  };
+
+  const productsOnPage = products.slice(count.start, count.end);
 
   useEffect(() => {
     dispatch(fetchProductsList());
@@ -163,21 +174,17 @@ const Catalog = (): JSX.Element => {
                     </form>
                   </div>
                   <div className="cards catalog__cards">
-                    {products.map((card) => (
-                      <ProductCard data = {card} key = {card.id}/>
+                    {productsOnPage.map((card) => (
+                      <ProductCard data={card} key={card.id} />
                     ))}
                   </div>
                   <div className="pagination">
-                    <ul className="pagination__list">
-                      <li className="pagination__item"><a className="pagination__link pagination__link--active" href="1">1</a>
-                      </li>
-                      <li className="pagination__item"><a className="pagination__link" href="2">2</a>
-                      </li>
-                      <li className="pagination__item"><a className="pagination__link" href="3">3</a>
-                      </li>
-                      <li className="pagination__item"><a className="pagination__link pagination__link--text" href="2">Далее</a>
-                      </li>
-                    </ul>
+                    {products.length > magicNumbers.cardsOnPage &&
+                      <PaginationList
+                        numberCards={products.length}
+                        cardsOnPage={magicNumbers.cardsOnPage}
+                        handlePaginationItemClick = {handlePaginationItemClick}
+                      />}
                   </div>
                 </div>
               </div>

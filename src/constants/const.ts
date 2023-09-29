@@ -22,6 +22,7 @@ export enum LevelProduct {
 export const ActionsNames = {
   LoadProductList: 'productsList/load',
   CheckProductListStatus: 'productListStatus/check',
+  ChangePageNumber: 'pageNumber/change',
 } as const;
 
 export enum PageRoute {
@@ -43,13 +44,17 @@ export enum RequestStatus {
   Reject = 'error',
 }
 
+export const StarsColor = {
+  Yellow: 'yellow',
+  Gray: 'gray',
+} as const;
+
 export const BACKEND_URL = 'https://camera-shop.accelerator.pages.academy';
 
 export const REQUEST_TIMEOUT = 3000;
 
-export const FIVE_STARS = 5;
-
-export const StarsColor = {
-  Yellow: 'yellow',
-  Gray: 'gray',
+export const magicNumbers = {
+  fiveStars: 5,
+  cardsOnPage: 9,
+  paginationItemsOnPage: 3,
 };

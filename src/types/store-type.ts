@@ -7,6 +7,7 @@ export type StoreType = {
   productItem: ProductType;
   similarProductList: ProductType[];
   loadProductListStatys: RequestStatus;
+  catalogPage: number;
 }
 
 export type State = ReturnType<typeof store.getState>;
