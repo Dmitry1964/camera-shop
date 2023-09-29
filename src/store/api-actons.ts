@@ -7,14 +7,14 @@ import { loadProductsList } from './actions';
 
 export const fetchProductsList = createAsyncThunk<
   void,
-  string,
+  undefined,
   {
     dispatch: AppDispatch;
     state: State;
     extra: AxiosInstance;
   }
   >('data/fetchProducts', async (aaa, {dispatch, extra: api}) => {
-    const {data} = await api.get<ProductType[]>(`${RequestRoute.Cameras}${aaa}`);
+    const {data} = await api.get<ProductType[]>(RequestRoute.Cameras);
     dispatch(loadProductsList(data));
 
   });

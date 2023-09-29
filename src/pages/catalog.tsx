@@ -1,20 +1,24 @@
+import { useEffect } from 'react';
 import Footer from '../components/footer/footer';
 import Header from '../components/header/header';
-import { useEffect } from 'react';
-import { useAppDispatch } from '../hooks/hooks';
+import { useAppDispatch, useAppSelector } from '../hooks/hooks';
 import { fetchProductsList } from '../store/api-actons';
 import ProductCard from '../components/product-card/product-card';
 import Loader from '../components/loader/loader';
+import { RequestStatus } from '../constants/const';
 
 const Catalog = (): JSX.Element => {
 
-  const aaa = '?_limit=10&_page=2';
   const dispatch = useAppDispatch();
+  const loadStatus = useAppSelector((state) => state.loadProductListStatys);
+  const products = useAppSelector((state) => state.productsList);
+
   useEffect(() => {
-    dispatch(fetchProductsList(aaa));
+    dispatch(fetchProductsList());
   }, [dispatch]);
   return (
     <div className="wrapper">
+      {loadStatus === RequestStatus.Pending && <Loader />}
       <Header />
       <main>
         <div className="banner">
@@ -159,7 +163,9 @@ const Catalog = (): JSX.Element => {
                     </form>
                   </div>
                   <div className="cards catalog__cards">
-                    <ProductCard />
+                    {products.map((card) => (
+                      <ProductCard data = {card} key = {card.id}/>
+                    ))}
                   </div>
                   <div className="pagination">
                     <ul className="pagination__list">

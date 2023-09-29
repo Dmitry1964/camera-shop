@@ -46,3 +46,10 @@ export enum RequestStatus {
 export const BACKEND_URL = 'https://camera-shop.accelerator.pages.academy';
 
 export const REQUEST_TIMEOUT = 3000;
+
+export const FIVE_STARS = 5;
+
+export const StarsColor = {
+  Yellow: 'yellow',
+  Gray: 'gray',
+};
