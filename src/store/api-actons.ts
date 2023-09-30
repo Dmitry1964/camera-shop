@@ -13,9 +13,8 @@ export const fetchProductsList = createAsyncThunk<
     state: State;
     extra: AxiosInstance;
   }
-  >('data/fetchProducts', async (aaa, {dispatch, extra: api}) => {
+  >('data/fetchProducts', async (_arg, {dispatch, extra: api}) => {
     const {data} = await api.get<ProductType[]>(`${RequestRoute.Cameras}?_limit=40`);
     dispatch(loadProductsList(data));
-
   });
 

@@ -49,6 +49,11 @@ export const StarsColor = {
   Gray: 'gray',
 } as const;
 
+export enum PaginationButtons {
+  Next = 'Дальше',
+  Prev = 'Назад',
+}
+
 export const BACKEND_URL = 'https://camera-shop.accelerator.pages.academy';
 
 export const REQUEST_TIMEOUT = 3000;
@@ -57,4 +62,5 @@ export const magicNumbers = {
   fiveStars: 5,
   cardsOnPage: 9,
   paginationItemsOnPage: 3,
+  firstPage: 1,
 };
