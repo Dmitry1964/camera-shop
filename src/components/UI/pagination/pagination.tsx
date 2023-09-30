@@ -8,7 +8,7 @@ import { magicNumbers, PaginationButtons } from '../../../constants/const';
 type PaginationProps = {
   totalCards: number;
   limit: number;
-  cahgePageCards: (p:number) => void;
+  cahgePageCards: (item:number) => void;
 }
 
 const Pagination = ({ totalCards, limit, cahgePageCards }: PaginationProps): JSX.Element => {
@@ -26,8 +26,10 @@ const Pagination = ({ totalCards, limit, cahgePageCards }: PaginationProps): JSX
   const handlerButtonClick = (evt: MouseEvent<HTMLAnchorElement>) => {
     evt.preventDefault();
     const buttonName = evt.target.textContent;
+    const start = pageCurrent.start + magicNumbers.paginationItemsOnPage;
+    const end = pageCurrent.end + magicNumbers.paginationItemsOnPage;
     if (buttonName === PaginationButtons.Next) {
-      setPageCurrent({ ...pageCurrent, start: pageCurrent.start + magicNumbers.paginationItemsOnPage, end: pageCurrent.end + magicNumbers.paginationItemsOnPage });
+      setPageCurrent({ ...pageCurrent, start: start, end: end });
     } else {
       setPageCurrent({ ...pageCurrent, start: pageCurrent.start - magicNumbers.paginationItemsOnPage, end: pageCurrent.end - magicNumbers.paginationItemsOnPage });
     }

@@ -1,4 +1,4 @@
-import { ProductType } from './server-data-type';
+import { ProductType, PromoOfferType } from './server-data-type';
 import { store } from '../store';
 import { RequestStatus } from '../constants/const';
 
@@ -7,7 +7,7 @@ export type StoreType = {
   productItem: ProductType;
   similarProductList: ProductType[];
   loadProductListStatys: RequestStatus;
-  catalogPage: number;
+  promoOffersList: PromoOfferType[];
 }
 
 export type State = ReturnType<typeof store.getState>;

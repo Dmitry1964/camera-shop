@@ -1,9 +1,9 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { State, AppDispatch } from '../types/store-type';
 import { AxiosInstance } from 'axios';
-import { ProductType } from '../types/server-data-type';
+import { ProductType, PromoOfferType } from '../types/server-data-type';
 import { RequestRoute } from '../constants/const';
-import { loadProductsList } from './actions';
+import { loadProductsList, loadPromoOffersList } from './actions';
 
 export const fetchProductsList = createAsyncThunk<
   void,
@@ -18,3 +18,15 @@ export const fetchProductsList = createAsyncThunk<
     dispatch(loadProductsList(data));
   });
 
+export const fetchPromoOffersList = createAsyncThunk<
+  void,
+  undefined,
+  {
+    dispatch: AppDispatch;
+    state: State;
+    extra: AxiosInstance;
+  }
+  >('data/fetchPromoOffersList', async(_arg, {dispatch, extra: api}) => {
+    const {data} = await api.get<PromoOfferType[]>(RequestRoute.Promo);
+    dispatch(loadPromoOffersList(data));
+  });

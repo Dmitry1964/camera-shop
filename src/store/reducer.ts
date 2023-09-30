@@ -6,11 +6,12 @@ import {
   LevelProduct,
   RequestStatus,
 } from '../constants/const';
-import { loadProductsList, changePageNumber } from './actions';
+import { loadProductsList, loadPromoOffersList } from './actions';
 import { fetchProductsList } from './api-actons';
 
 const initialState: StoreType = {
   productsList: [],
+  promoOffersList: [],
   productItem: {
     id: 0,
     name: '',
@@ -29,7 +30,6 @@ const initialState: StoreType = {
   },
   similarProductList: [],
   loadProductListStatys: RequestStatus.Idle,
-  catalogPage: 1,
 };
 
 const reducer = createReducer(initialState, (builder) => {
@@ -47,10 +47,11 @@ const reducer = createReducer(initialState, (builder) => {
     state.loadProductListStatys = RequestStatus.Reject;
   });
 
-  // смена страницы каталога
-  builder.addCase(changePageNumber, (state, action) => {
-    state.catalogPage = action.payload;
+  // загрузка спмска промо предложений
+  builder.addCase(loadPromoOffersList, (state, action) => {
+    state.promoOffersList = action.payload;
   });
+
 });
 
 export { reducer };
