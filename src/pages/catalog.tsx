@@ -6,7 +6,7 @@ import { fetchProductsList } from '../store/api-actons';
 import ProductCard from '../components/product-card/product-card';
 import Loader from '../components/loader/loader';
 import { RequestStatus, magicNumbers } from '../constants/const';
-import PaginationList from '../components/UI/pagination-list/pagination-list';
+import Pagination from '../components/UI/pagination/pagination';
 
 const Catalog = (): JSX.Element => {
 
@@ -16,11 +16,6 @@ const Catalog = (): JSX.Element => {
 
 
   const [count, setCount] = useState({ start: 0, end: magicNumbers.cardsOnPage });
-  const handlePaginationItemClick = (evt : React.MouseEvent<HTMLAnchorElement>) => {
-    evt.preventDefault();
-    const numPage = parseInt(evt.target.textContent, 10);
-    setCount({...count, start: magicNumbers.cardsOnPage * (numPage-1), end: magicNumbers.cardsOnPage * numPage })
-  };
 
   const productsOnPage = products.slice(count.start, count.end);
 
@@ -178,14 +173,7 @@ const Catalog = (): JSX.Element => {
                       <ProductCard data={card} key={card.id} />
                     ))}
                   </div>
-                  <div className="pagination">
-                    {products.length > magicNumbers.cardsOnPage &&
-                      <PaginationList
-                        numberCards={products.length}
-                        cardsOnPage={magicNumbers.cardsOnPage}
-                        handlePaginationItemClick = {handlePaginationItemClick}
-                      />}
-                  </div>
+                  <Pagination totalCards = {products.length} limit = {magicNumbers.cardsOnPage}/>
                 </div>
               </div>
             </div>
