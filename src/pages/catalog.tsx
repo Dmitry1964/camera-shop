@@ -19,9 +19,16 @@ const Catalog = (): JSX.Element => {
 
   const productsOnPage = products.slice(count.start, count.end);
 
+  const cahgePageCards = (item : number) => {
+    const start = (item - 1) * magicNumbers.cardsOnPage;
+    const end = item * magicNumbers.cardsOnPage;
+    setCount({...count, start: start, end: end });
+  };
+
   useEffect(() => {
     dispatch(fetchProductsList());
   }, [dispatch]);
+
   return (
     <div className="wrapper">
       {loadStatus === RequestStatus.Pending && <Loader />}
@@ -173,7 +180,7 @@ const Catalog = (): JSX.Element => {
                       <ProductCard data={card} key={card.id} />
                     ))}
                   </div>
-                  <Pagination totalCards = {products.length} limit = {magicNumbers.cardsOnPage}/>
+                  <Pagination totalCards = {products.length} limit = {magicNumbers.cardsOnPage} cahgePageCards = {cahgePageCards}/>
                 </div>
               </div>
             </div>
