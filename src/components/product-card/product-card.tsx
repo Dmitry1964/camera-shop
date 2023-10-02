@@ -1,11 +1,15 @@
+import { RequestRoute } from '../../constants/const';
 import { ProductType } from '../../types/server-data-type';
 import ProductCardRate from '../UI/product-card-rate/product-card-rate';
+import { Link } from 'react-router-dom';
 
 type ProductCardProps = {
   data: ProductType;
 }
 const ProductCard = ({data} : ProductCardProps): JSX.Element => {
-  const {name, reviewCount, rating, price, previewImg, previewImg2x, previewImgWebp, previewImgWebp2x} = data;
+  const {id, name, reviewCount, rating, price, previewImg, previewImg2x, previewImgWebp, previewImgWebp2x} = data;
+  const productDetailedRef = `${RequestRoute.Cameras}/${id}`;
+
   return (
     <div className="product-card">
       <div className="product-card__img">
@@ -22,8 +26,8 @@ const ProductCard = ({data} : ProductCardProps): JSX.Element => {
       <div className="product-card__buttons">
         <button className="btn btn--purple product-card__btn" type="button">Купить
         </button>
-        <a className="btn btn--transparent" href="#">Подробнее
-        </a>
+        <Link to={productDetailedRef} className="btn btn--transparent">Подробнее
+        </Link>
       </div>
     </div>
   );

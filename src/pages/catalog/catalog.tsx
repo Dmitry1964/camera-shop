@@ -1,13 +1,13 @@
 import { useEffect, useState } from 'react';
-import Footer from '../components/footer/footer';
-import Header from '../components/header/header';
-import { useAppDispatch, useAppSelector } from '../hooks/hooks';
-import { fetchProductsList } from '../store/api-actons';
-import ProductCard from '../components/product-card/product-card';
-import Loader from '../components/loader/loader';
-import { RequestStatus, magicNumbers } from '../constants/const';
-import Pagination from '../components/UI/pagination/pagination';
-import Banner from '../components/banner/banner';
+import Footer from '../../components/footer/footer';
+import Header from '../../components/header/header';
+import { useAppDispatch, useAppSelector } from '../../hooks/hooks';
+import { fetchProductsList } from '../../store/api-actons';
+import ProductCard from '../../components/product-card/product-card';
+import Loader from '../../components/loader/loader';
+import { RequestStatus, magicNumbers } from '../../constants/const';
+import Pagination from '../../components/UI/pagination/pagination';
+import Banner from '../../components/banner/banner';
 
 const Catalog = (): JSX.Element => {
 
