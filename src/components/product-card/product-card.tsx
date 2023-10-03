@@ -2,19 +2,23 @@ import { RequestRoute } from '../../constants/const';
 import { ProductType } from '../../types/server-data-type';
 import ProductCardRate from '../UI/product-card-rate/product-card-rate';
 import { Link } from 'react-router-dom';
+import cn from 'classnames';
 
 type ProductCardProps = {
   data: ProductType;
+  active?: number[];
+  index?: number;
 }
-const ProductCard = ({data} : ProductCardProps): JSX.Element => {
+const ProductCard = ({data, active, index} : ProductCardProps): JSX.Element => {
   const {id, name, reviewCount, rating, price, previewImg, previewImg2x, previewImgWebp, previewImgWebp2x} = data;
   const productDetailedRef = `${RequestRoute.Cameras}/${id}`;
 
   return (
-    <div className="product-card">
+    <div className={cn('product-card', {'is-active': active?.includes(index)})}>
       <div className="product-card__img">
         <picture>
-          <source type="image/webp" srcSet={`${previewImgWebp}, ${previewImgWebp2x}`} /><img src={previewImg} srcSet={previewImg2x} width="280" height="240" alt="Ретрокамера «Das Auge IV»" />
+          <source type="image/webp" srcSet={`../${previewImgWebp}, ../${previewImgWebp2x}`} />
+          <img src={`../${previewImg}`} srcSet={previewImg2x} width="280" height="240" alt={name} />
         </picture>
       </div>
       <div className="product-card__info">

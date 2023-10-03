@@ -21,7 +21,9 @@ export enum LevelProduct {
 
 export const ActionsNames = {
   LoadProductList: 'productsList/load',
+  LoadSimilarProductList: 'cimilarProductsList/load',
   LoadPromoOffersList: 'promoOffersList/load',
+  LoadProductCard: 'productCard/load',
   CheckProductListStatus: 'productListStatus/check',
   ChangePageNumber: 'pageNumber/change',
 } as const;

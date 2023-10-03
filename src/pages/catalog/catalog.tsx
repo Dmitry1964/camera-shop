@@ -14,12 +14,8 @@ const Catalog = (): JSX.Element => {
   const dispatch = useAppDispatch();
   const loadStatus = useAppSelector((state) => state.loadProductListStatys);
   const products = useAppSelector((state) => state.productsList);
-
-
   const [count, setCount] = useState({ start: 0, end: magicNumbers.cardsOnPage });
-
   const productsOnPage = products.slice(count.start, count.end);
-
   const cahgePageCards = (item : number) => {
     const start = (item - 1) * magicNumbers.cardsOnPage;
     const end = item * magicNumbers.cardsOnPage;

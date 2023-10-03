@@ -6,13 +6,13 @@ import {
   LevelProduct,
   RequestStatus,
 } from '../constants/const';
-import { loadProductsList, loadPromoOffersList } from './actions';
+import { LoadSimilarProductList, loadProductData, loadProductsList, loadPromoOffersList } from './actions';
 import { fetchProductsList } from './api-actons';
 
 const initialState: StoreType = {
   productsList: [],
   promoOffersList: [],
-  productItem: {
+  productCard: {
     id: 0,
     name: '',
     vendorCode: '',
@@ -47,9 +47,19 @@ const reducer = createReducer(initialState, (builder) => {
     state.loadProductListStatys = RequestStatus.Reject;
   });
 
+  // загрузка списка похожих товаров
+  builder.addCase(LoadSimilarProductList, (state, action) => {
+    state.similarProductList = action.payload;
+  });
+
   // загрузка спмска промо предложений
   builder.addCase(loadPromoOffersList, (state, action) => {
     state.promoOffersList = action.payload;
+  });
+
+  // загрузка карточки товара
+  builder.addCase(loadProductData, (state, action) => {
+    state.productCard = action.payload;
   });
 
 });

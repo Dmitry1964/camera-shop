@@ -4,7 +4,7 @@ import { RequestStatus } from '../constants/const';
 
 export type StoreType = {
   productsList: ProductType[];
-  productItem: ProductType;
+  productCard: ProductType;
   similarProductList: ProductType[];
   loadProductListStatys: RequestStatus;
   promoOffersList: PromoOfferType[];

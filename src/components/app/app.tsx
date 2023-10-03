@@ -10,7 +10,7 @@ const App = (): JSX.Element => (
         <Route index element={<Catalog />} />
       </Route>
       <Route path={PageRoute.Product} element={<Product />}>
-        <Route path=':cameraId' element={<Product/>}/>
+        <Route path=':camerasId' element={<Product/>}/>
       </Route>
     </Routes>
   </BrowserRouter>
