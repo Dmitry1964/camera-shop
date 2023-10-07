@@ -3,16 +3,22 @@ import ProductCard from '../product-card/product-card';
 import { useState } from 'react';
 
 type SimilarProductProps = {
-  data1: ProductType[];
+  similarList: ProductType[];
 }
 
-const SimilarProduct = ({ data1 }: SimilarProductProps): JSX.Element => {
+const SimilarProduct = ({ similarList }: SimilarProductProps): JSX.Element => {
   const namberActiveCards = [0, 1, 2];
-  const [activeCard, setActiveCard] = useState(namberActiveCards);
+  const [activeCards, setActiveCards] = useState(namberActiveCards);
 
-  const aaa = () => {
-    setActiveCard(activeCard.map((item) => item + 1));
+  const handleButtonNextClick = () => {
+    setActiveCards(activeCards.map((item) => item + 1));
   };
+
+  const handleButtonPrevClick = () => {
+    setActiveCards(activeCards.map((item) => item - 1));
+  };
+
+  const lengthList = similarList.length;
 
   return (
     <section className="product-similar">
@@ -20,23 +26,25 @@ const SimilarProduct = ({ data1 }: SimilarProductProps): JSX.Element => {
         <h2 className="title title--h3">Похожие товары</h2>
         <div className="product-similar__slider">
           <div className="product-similar__slider-list">
-            {data1.map((item, index) => (
-              <ProductCard data={item} key={item.id} active={activeCard} index={index} />
+            {similarList.map((item, index) => (
+              <ProductCard data={item} key={item.id} active={activeCards} index={index} />
             ))}
           </div>
           <button
-            className="slider-controls slider-controls--prev"
+            onClick = {handleButtonPrevClick}
+            className="slider-control slider-controls--prev"
             type="button" aria-label="Предыдущий слайд"
-            disabled
+            disabled = {activeCards.includes(0)}
           >
             <svg width="7" height="12" aria-hidden="true">
               <use xlinkHref="#icon-arrow"></use>
             </svg>
           </button>
           <button
-            onClick={aaa}
-            className="slider-controls--next slider-controls"
+            onClick={handleButtonNextClick}
+            className="slider-controls--next slider-control"
             aria-label="Следующий слайд"
+            disabled = {activeCards.includes(lengthList - 1)}
           >
             <svg width="7" height="12" aria-hidden="true">
               <use xlinkHref="#icon-arrow"></use>

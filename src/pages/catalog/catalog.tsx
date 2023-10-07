@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import Footer from '../../components/footer/footer';
 import Header from '../../components/header/header';
+import Breadcrumbs from '../../components/breadcrumbs/breadcrumbs';
 import { useAppDispatch, useAppSelector } from '../../hooks/hooks';
 import { fetchProductsList } from '../../store/api-actons';
 import ProductCard from '../../components/product-card/product-card';
@@ -33,21 +34,7 @@ const Catalog = (): JSX.Element => {
       <main>
         <Banner />
         <div className="page-content">
-          <div className="breadcrumbs">
-            <div className="container">
-              <ul className="breadcrumbs__list">
-                <li className="breadcrumbs__item">
-                  <a className="breadcrumbs__link" href="index.html">Главная
-                    <svg width="5" height="8" aria-hidden="true">
-                      <use xlinkHref="#icon-arrow-mini"></use>
-                    </svg>
-                  </a>
-                </li>
-                <li className="breadcrumbs__item"><span className="breadcrumbs__link breadcrumbs__link--active">Каталог</span>
-                </li>
-              </ul>
-            </div>
-          </div>
+          <Breadcrumbs />
           <section className="catalog">
             <div className="container">
               <h1 className="title title--h2">Каталог фото- и видеотехники</h1>

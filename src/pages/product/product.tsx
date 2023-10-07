@@ -1,12 +1,14 @@
 import Header from '../../components/header/header';
 import Footer from '../../components/footer/footer';
 import Tabs from '../../components/tabs/tabs';
+import Breadcrumbs from '../../components/breadcrumbs/breadcrumbs';
 import SimilarProduct from '../../components/similar-product/similar-product';
 import { useParams } from 'react-router-dom';
 import { useEffect } from 'react';
 import { useAppDispatch, useAppSelector } from '../../hooks/hooks';
 import { fetchProductCardData, fetchSimilarProductsList } from '../../store/api-actons';
 import ProductCardRate from '../../components/UI/product-card-rate/product-card-rate';
+
 
 const Product = (): JSX.Element => {
   const {camerasId} = useParams();
@@ -26,7 +28,8 @@ const Product = (): JSX.Element => {
       <Header />
       <main>
         <div className="page-content">
-          <div className="breadcrumbs">
+          <Breadcrumbs id = {id} />
+          {/* <div className="breadcrumbs">
             <div className="container">
               <ul className="breadcrumbs__list">
                 <li className="breadcrumbs__item">
@@ -47,7 +50,7 @@ const Product = (): JSX.Element => {
                 </li>
               </ul>
             </div>
-          </div>
+          </div> */}
           <div className="page-content__section">
             <section className="product">
               <div className="container">
@@ -72,7 +75,7 @@ const Product = (): JSX.Element => {
             </section>
           </div>
           <div className="page-content__section">
-            <SimilarProduct data1 = {similarData} />
+            <SimilarProduct similarList = {similarData} />
           </div>
           <div className="page-content__section">
             <section className="review-block">
