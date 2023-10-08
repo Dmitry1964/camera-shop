@@ -11,11 +11,11 @@ const SimilarProduct = ({ similarList }: SimilarProductProps): JSX.Element => {
   const [activeCards, setActiveCards] = useState(namberActiveCards);
 
   const handleButtonNextClick = () => {
-    setActiveCards(activeCards.map((item) => item + 1));
+    setActiveCards(activeCards.map((item) => item + 3));
   };
 
   const handleButtonPrevClick = () => {
-    setActiveCards(activeCards.map((item) => item - 1));
+    setActiveCards(activeCards.map((item) => item - 3));
   };
 
   const lengthList = similarList.length;
@@ -32,7 +32,7 @@ const SimilarProduct = ({ similarList }: SimilarProductProps): JSX.Element => {
           </div>
           <button
             onClick = {handleButtonPrevClick}
-            className="slider-control slider-controls--prev"
+            className="slider-controls slider-controls--prev"
             type="button" aria-label="Предыдущий слайд"
             disabled = {activeCards.includes(0)}
           >
@@ -42,7 +42,7 @@ const SimilarProduct = ({ similarList }: SimilarProductProps): JSX.Element => {
           </button>
           <button
             onClick={handleButtonNextClick}
-            className="slider-controls--next slider-control"
+            className="slider-controls--next slider-controls"
             aria-label="Следующий слайд"
             disabled = {activeCards.includes(lengthList - 1)}
           >

@@ -154,8 +154,8 @@ const Catalog = (): JSX.Element => {
                     </form>
                   </div>
                   <div className="cards catalog__cards">
-                    {productsOnPage.map((card) => (
-                      <ProductCard data={card} key={card.id} />
+                    {productsOnPage.map((card, index) => (
+                      <ProductCard data={card} key={card.id} index={index} />
                     ))}
                   </div>
                   <Pagination totalCards = {products.length} limit = {magicNumbers.cardsOnPage} cahgePageCards = {cahgePageCards}/>
