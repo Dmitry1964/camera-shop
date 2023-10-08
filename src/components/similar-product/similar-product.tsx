@@ -1,6 +1,7 @@
 import { ProductType } from '../../types/server-data-type';
 import ProductCard from '../product-card/product-card';
 import { useState } from 'react';
+import './similar-product.css'
 
 type SimilarProductProps = {
   similarList: ProductType[];
