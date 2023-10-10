@@ -8,8 +8,9 @@ type ProductCardProps = {
   data: ProductType;
   active?: number[];
   index: number;
+  handleButtonBuyClick: (id:number) => void;
 }
-const ProductCard = ({ data, active, index }: ProductCardProps): JSX.Element => {
+const ProductCard = ({ data, active, index, handleButtonBuyClick }: ProductCardProps): JSX.Element => {
   const { id, name, reviewCount, rating, price, previewImg, previewImg2x, previewImgWebp, previewImgWebp2x } = data;
   const productDetailedRef = `${RequestRoute.Cameras}/${id}`;
 
@@ -28,7 +29,12 @@ const ProductCard = ({ data, active, index }: ProductCardProps): JSX.Element => 
         </p>
       </div>
       <div className="product-card__buttons">
-        <button className="btn btn--purple product-card__btn" type="button">Купить
+        <button
+          onClick={() =>handleButtonBuyClick(id)}
+          className="btn btn--purple product-card__btn"
+          type="button"
+        >
+          Купить
         </button>
         <Link to={productDetailedRef} className="btn btn--transparent">Подробнее
         </Link>

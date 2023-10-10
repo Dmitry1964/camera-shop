@@ -8,6 +8,7 @@ import {
 } from '../constants/const';
 import {
   LoadSimilarProductList,
+  selectedProductBasket,
   loadProductData,
   loadProductsList,
   loadPromoOffersList,
@@ -34,6 +35,23 @@ const initialState: StoreType = {
     previewImgWebp: '',
     previewImgWebp2x: '',
   },
+  selectedProduct: {
+    id: 0,
+    name: '',
+    vendorCode: '',
+    type: TypeProduct.NoType,
+    category: CategoryProduct.NoCategory,
+    description: '',
+    level: LevelProduct.NoLevel,
+    price: 0,
+    rating: 0,
+    reviewCount: 0,
+    previewImg: '',
+    previewImg2x: '',
+    previewImgWebp: '',
+    previewImgWebp2x: '',
+  },
+  basket: [],
   similarProductList: [],
   reviewsList: [],
   loadProductListStatus: RequestStatus.Idle,
@@ -80,7 +98,12 @@ const reducer = createReducer(initialState, (builder) => {
   // загрузка списка отзывов
   builder.addCase(loadReviewsList, (state, action) => {
     state.reviewsList = action.payload;
-})
+  });
+
+  // выбраннфй для покупки товар
+  builder.addCase(selectedProductBasket, (state, action) => {
+    state.selectedProduct = action.payload;
+  });
 
 });
 

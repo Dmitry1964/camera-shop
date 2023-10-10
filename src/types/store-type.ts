@@ -10,6 +10,8 @@ export type StoreType = {
   loadProductListStatus: RequestStatus;
   loadSimilarListStatus: RequestStatus;
   reviewsList: ReviewType[];
+  basket: ProductType[];
+  selectedProduct: ProductType;
 }
 
 export type State = ReturnType<typeof store.getState>;

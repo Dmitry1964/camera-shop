@@ -27,7 +27,8 @@ export const ActionsNames = {
   LoadReviewsList: 'reviewsList/load',
   CheckProductListStatus: 'productListStatus/check',
   CheckSimilarListStatus: 'similarListStatus/check',
-  ChangePageNumber: 'pageNumber/change',
+  SelectedProductBasket: 'productBasket/selected',
+  AddProductBasket: 'productBasket/add',
 } as const;
 
 export enum PageRoute {

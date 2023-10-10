@@ -10,3 +10,4 @@ export const loadProductData = createAction<ProductType>(ActionsNames.LoadProduc
 export const checkLoadProductListStatus = createAction(ActionsNames.CheckProductListStatus);
 export const checkLoadSimilarListStatus = createAction(ActionsNames.CheckSimilarListStatus);
 export const loadReviewsList = createAction<ReviewType[]>(ActionsNames.LoadReviewsList);
+export const selectedProductBasket = createAction<ProductType>(ActionsNames.SelectedProductBasket);

@@ -2,25 +2,41 @@ import { useEffect, useState } from 'react';
 import Footer from '../../components/footer/footer';
 import Header from '../../components/header/header';
 import Breadcrumbs from '../../components/breadcrumbs/breadcrumbs';
+import ModalAddTtem from '../../components/modal-add-item/modal-add-item';
+import ModalAddItemSucces from '../../components/modal-add-item-success/modal-add-item-succes';
+import Loader from '../../components/loader/loader';
+import Banner from '../../components/banner/banner';
+import Pagination from '../../components/UI/pagination/pagination';
 import { useAppDispatch, useAppSelector } from '../../hooks/hooks';
 import { fetchProductsList } from '../../store/api-actons';
 import ProductCard from '../../components/product-card/product-card';
-import Loader from '../../components/loader/loader';
 import { RequestStatus, magicNumbers } from '../../constants/const';
-import Pagination from '../../components/UI/pagination/pagination';
-import Banner from '../../components/banner/banner';
+import { selectedProductBasket } from '../../store/actions';
 
 const Catalog = (): JSX.Element => {
 
   const dispatch = useAppDispatch();
-  const loadStatus = useAppSelector((state) => state.loadProductListStatys);
+  const loadStatus = useAppSelector((state) => state.loadProductListStatus);
   const products = useAppSelector((state) => state.productsList);
   const [count, setCount] = useState({ start: 0, end: magicNumbers.cardsOnPage });
   const productsOnPage = products.slice(count.start, count.end);
-  const cahgePageCards = (item : number) => {
+  const cahgePageCards = (item: number) => {
     const start = (item - 1) * magicNumbers.cardsOnPage;
     const end = item * magicNumbers.cardsOnPage;
-    setCount({...count, start: start, end: end });
+    setCount({ ...count, start: start, end: end });
+  };
+
+  const [activeModal, setActiveModal] = useState({ addModal: false, succesModal: false });
+  const changeStatusModal = () => setActiveModal({ ...activeModal, addModal: !activeModal.addModal });
+
+  const handleButtonBuyClick = (id: number) => {
+    const [product] = products.filter((camera) => camera.id === id);
+    changeStatusModal();
+    dispatch(selectedProductBasket(product));
+  };
+
+  const handleButtonAddClick = () => {
+    changeStatusModal();
   };
 
   useEffect(() => {
@@ -155,15 +171,20 @@ const Catalog = (): JSX.Element => {
                   </div>
                   <div className="cards catalog__cards">
                     {productsOnPage.map((card, index) => (
-                      <ProductCard data={card} key={card.id} index={index} />
+                      <ProductCard data={card} key={card.id} index={index} handleButtonBuyClick={handleButtonBuyClick} />
                     ))}
                   </div>
-                  <Pagination totalCards = {products.length} limit = {magicNumbers.cardsOnPage} cahgePageCards = {cahgePageCards}/>
+                  <Pagination totalCards={products.length} limit={magicNumbers.cardsOnPage} cahgePageCards={cahgePageCards} />
                 </div>
               </div>
             </div>
           </section>
         </div>
+        <ModalAddTtem isActive={activeModal.addModal}
+          handleButtonAddClick={handleButtonAddClick}
+          changeStatusModal={changeStatusModal}
+        />
+        <ModalAddItemSucces isActive={activeModal.succesModal} />
       </main>
       <Footer />
     </div>
