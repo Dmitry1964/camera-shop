@@ -1,5 +1,5 @@
 import {createAction} from '@reduxjs/toolkit';
-import { ProductType, PromoOfferType } from '../types/server-data-type';
+import { ProductType, PromoOfferType, ReviewType } from '../types/server-data-type';
 import { ActionsNames } from '../constants/const';
 
 
@@ -8,3 +8,5 @@ export const LoadSimilarProductList = createAction<ProductType[]>(ActionsNames.L
 export const loadPromoOffersList = createAction<PromoOfferType[]>(ActionsNames.LoadPromoOffersList);
 export const loadProductData = createAction<ProductType>(ActionsNames.LoadProductCard);
 export const checkLoadProductListStatus = createAction(ActionsNames.CheckProductListStatus);
+export const checkLoadSimilarListStatus = createAction(ActionsNames.CheckSimilarListStatus);
+export const loadReviewsList = createAction<ReviewType[]>(ActionsNames.LoadReviewsList);

@@ -24,7 +24,9 @@ export const ActionsNames = {
   LoadSimilarProductList: 'cimilarProductsList/load',
   LoadPromoOffersList: 'promoOffersList/load',
   LoadProductCard: 'productCard/load',
+  LoadReviewsList: 'reviewsList/load',
   CheckProductListStatus: 'productListStatus/check',
+  CheckSimilarListStatus: 'similarListStatus/check',
   ChangePageNumber: 'pageNumber/change',
 } as const;
 
@@ -67,4 +69,6 @@ export const magicNumbers = {
   cardsOnPage: 9,
   paginationItemsOnPage: 3,
   firstPage: 1,
+  step: 3,
+  showReviewStep: 3,
 };

@@ -6,8 +6,14 @@ import {
   LevelProduct,
   RequestStatus,
 } from '../constants/const';
-import { LoadSimilarProductList, loadProductData, loadProductsList, loadPromoOffersList } from './actions';
-import { fetchProductsList } from './api-actons';
+import {
+  LoadSimilarProductList,
+  loadProductData,
+  loadProductsList,
+  loadPromoOffersList,
+  loadReviewsList,
+} from './actions';
+import { fetchProductsList, fetchSimilarProductsList } from './api-actons';
 
 const initialState: StoreType = {
   productsList: [],
@@ -29,7 +35,9 @@ const initialState: StoreType = {
     previewImgWebp2x: '',
   },
   similarProductList: [],
-  loadProductListStatys: RequestStatus.Idle,
+  reviewsList: [],
+  loadProductListStatus: RequestStatus.Idle,
+  loadSimilarListStatus: RequestStatus.Idle,
 };
 
 const reducer = createReducer(initialState, (builder) => {
@@ -38,19 +46,26 @@ const reducer = createReducer(initialState, (builder) => {
     state.productsList = action.payload;
   });
   builder.addCase(fetchProductsList.pending, (state) => {
-    state.loadProductListStatys = RequestStatus.Pending;
+    state.loadProductListStatus = RequestStatus.Pending;
   });
   builder.addCase(fetchProductsList.fulfilled, (state) => {
-    state.loadProductListStatys = RequestStatus.Success;
+    state.loadProductListStatus = RequestStatus.Success;
   });
   builder.addCase(fetchProductsList.rejected, (state) => {
-    state.loadProductListStatys = RequestStatus.Reject;
+    state.loadProductListStatus = RequestStatus.Reject;
   });
 
   // загрузка списка похожих товаров
   builder.addCase(LoadSimilarProductList, (state, action) => {
     state.similarProductList = action.payload;
   });
+  builder.addCase(fetchSimilarProductsList.pending, (state) => {
+    state.loadSimilarListStatus = RequestStatus.Pending;
+  });
+  builder.addCase(fetchSimilarProductsList.fulfilled, (state) => {
+    state.loadSimilarListStatus = RequestStatus.Success;
+  });
+
 
   // загрузка спмска промо предложений
   builder.addCase(loadPromoOffersList, (state, action) => {
@@ -61,6 +76,11 @@ const reducer = createReducer(initialState, (builder) => {
   builder.addCase(loadProductData, (state, action) => {
     state.productCard = action.payload;
   });
+
+  // загрузка списка отзывов
+  builder.addCase(loadReviewsList, (state, action) => {
+    state.reviewsList = action.payload;
+})
 
 });
 

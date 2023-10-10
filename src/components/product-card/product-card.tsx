@@ -24,7 +24,7 @@ const ProductCard = ({ data, active, index }: ProductCardProps): JSX.Element => 
       <div className="product-card__info">
         <ProductCardRate rating={rating} reviewCount={reviewCount} />
         <p className="product-card__title">{name}</p>
-        <p className="product-card__price"><span className="visually-hidden">Цена:</span>{price} &#8381;
+        <p className="product-card__price"><span className="visually-hidden">Цена:</span>{price.toLocaleString('ru-RU')} &#8381;
         </p>
       </div>
       <div className="product-card__buttons">
