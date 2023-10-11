@@ -5,6 +5,8 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import { Autoplay } from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/css/autoplay';
+import { Link } from 'react-router-dom';
+import { RequestRoute } from '../../constants/const';
 
 const Banner = (): JSX.Element => {
 
@@ -34,7 +36,9 @@ const Banner = (): JSX.Element => {
               <span className="banner__message">Новинка!</span>
               <span className="title title--h1">{item.name}</span>
               <span className="banner__text">Профессиональная камера от&nbsp;известного производителя</span>
-              <a className="btn" href="#">Подробнее</a>
+              <Link className="btn" to={`${RequestRoute.Cameras}/${item.id}`}>
+                Подробнее
+              </Link>
             </p>
           </div>
         </SwiperSlide>

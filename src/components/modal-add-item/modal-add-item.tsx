@@ -14,13 +14,13 @@ const ModalAddTtem = ({ isActive, handleButtonAddClick, changeStatusModal }: Mod
 
   useEffect(() =>{
     const close = (evt: { keyCode: number }) => {
-      if(evt.keyCode === 27) {
+      if(evt.keyCode === 27 && isActive) {
         changeStatusModal();
       }
     };
     window.addEventListener('keydown', close);
     return () => window.removeEventListener('keydown', close);
-  },[changeStatusModal]);
+  },[changeStatusModal, isActive]);
 
   return (
     <div
