@@ -73,3 +73,5 @@ export const magicNumbers = {
   step: 3,
   showReviewStep: 3,
 };
+
+export const months = ['Январь', 'Февраль', 'Март', 'Апрель', 'Май', 'Июнь', 'Июль', 'Август', 'Сентябрь', 'Октябрь', 'Ноябрь', 'Декабрь'];

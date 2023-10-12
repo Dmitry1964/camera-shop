@@ -14,7 +14,7 @@ import {
   loadPromoOffersList,
   loadReviewsList,
 } from './actions';
-import { fetchProductsList, fetchSimilarProductsList } from './api-actons';
+import { fetchProductsList, fetchReviewsList, fetchSimilarProductsList } from './api-actons';
 
 const initialState: StoreType = {
   productsList: [],
@@ -56,6 +56,7 @@ const initialState: StoreType = {
   reviewsList: [],
   loadProductListStatus: RequestStatus.Idle,
   loadSimilarListStatus: RequestStatus.Idle,
+  loadReviewsListStatus: RequestStatus.Idle,
 };
 
 const reducer = createReducer(initialState, (builder) => {
@@ -99,6 +100,13 @@ const reducer = createReducer(initialState, (builder) => {
   builder.addCase(loadReviewsList, (state, action) => {
     state.reviewsList = action.payload;
   });
+  builder.addCase(fetchReviewsList.pending, (state) => {
+    state.loadReviewsListStatus = RequestStatus.Pending;
+  });
+  builder.addCase(fetchReviewsList.fulfilled, (state) => {
+    state.loadReviewsListStatus = RequestStatus.Success;
+  });
+
 
   // выбраннфй для покупки товар
   builder.addCase(selectedProductBasket, (state, action) => {

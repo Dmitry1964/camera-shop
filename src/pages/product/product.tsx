@@ -24,6 +24,7 @@ const Product = (): JSX.Element => {
   const similarDataList : ProductType[] = useAppSelector((state) => state.similarProductList);
 
   const loadStatus = useAppSelector((state) => state.loadSimilarListStatus);
+  const reviewsList = useAppSelector((state) => state.reviewsList);
 
   const getSimilarList = () => {
     const similarList : ProductType[] = [];
@@ -76,11 +77,11 @@ const Product = (): JSX.Element => {
             <SimilarProduct similarList={getSimilarList()} />
           </div>
           <div className="page-content__section">
-            <ReviewsList />
+            <ReviewsList reviewsList = {reviewsList} />
           </div>
         </div>
       </main>
-      <a className="up-btn" href="#header">
+      <a className="up-btn" href="#header" >
         <svg width="12" height="18" aria-hidden="true">
           <use xlinkHref="#icon-arrow2"></use>
         </svg>

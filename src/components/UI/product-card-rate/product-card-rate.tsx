@@ -2,7 +2,7 @@ import { StarsColor, magicNumbers } from '../../../constants/const';
 
 type ProductCardRateProps = {
   rating: number;
-  reviewCount: number;
+  reviewCount?: number;
 }
 
 const ProductCardRate = ({ rating, reviewCount }: ProductCardRateProps): JSX.Element => {

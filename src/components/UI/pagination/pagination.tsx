@@ -14,7 +14,7 @@ type PaginationProps = {
 const Pagination = ({ totalCards, limit, cahgePageCards }: PaginationProps): JSX.Element => {
 
   const [page, setPage] = useState(magicNumbers.firstPage);
-  const [pageCurrent, setPageCurrent] = useState({ start: 0, end: 3 });
+  const [pageCurrent, setPageCurrent] = useState({ start: 0, end: magicNumbers.paginationItemsOnPage });
 
   const itemsPagination = totalPages(totalCards, limit).slice(pageCurrent.start, pageCurrent.end);
 

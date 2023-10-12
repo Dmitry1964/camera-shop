@@ -9,6 +9,7 @@ export type StoreType = {
   promoOffersList: PromoOfferType[];
   loadProductListStatus: RequestStatus;
   loadSimilarListStatus: RequestStatus;
+  loadReviewsListStatus: RequestStatus;
   reviewsList: ReviewType[];
   basket: ProductType[];
   selectedProduct: ProductType;
