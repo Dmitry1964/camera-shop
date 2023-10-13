@@ -4,9 +4,10 @@ import { useState } from 'react';
 
 type ReviewsListProps = {
   reviewsList: ReviewType[];
+  handleButtonAddReviewClick: () => void;
 }
 
-const ReviewsList = ({ reviewsList }: ReviewsListProps): JSX.Element => {
+const ReviewsList = ({ reviewsList, handleButtonAddReviewClick }: ReviewsListProps): JSX.Element => {
   const [previewsCount, setPreviewsCount] = useState(3);
 
   const reviewsListSort = [...reviewsList].sort((a: ReviewType, b: ReviewType) => new Date(b.createAt).getTime() - new Date(a.createAt).getTime()).slice(0, previewsCount);
@@ -15,7 +16,13 @@ const ReviewsList = ({ reviewsList }: ReviewsListProps): JSX.Element => {
       <div className="container">
         <div className="page-content__headed">
           <h2 className="title title--h3">Отзывы</h2>
-          <button className="btn" type="button">Оставить свой отзыв</button>
+          <button
+            onClick={handleButtonAddReviewClick}
+            className="btn"
+            type="button"
+          >
+            Оставить свой отзыв
+          </button>
         </div>
         <ul className="review-block__list">
           {reviewsListSort.map((item) => (

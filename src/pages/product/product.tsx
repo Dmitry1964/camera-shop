@@ -4,8 +4,9 @@ import Tabs from '../../components/tabs/tabs';
 import Breadcrumbs from '../../components/breadcrumbs/breadcrumbs';
 import ReviewsList from '../../components/reviews-list/reviews-list';
 import SimilarProduct from '../../components/similar-product/similar-product';
+import ModalReviewForm from '../../components/modal-review-form/modal-review-form';
 import { useParams } from 'react-router-dom';
-import { useEffect} from 'react';
+import { useEffect, useState} from 'react';
 import { useAppDispatch, useAppSelector } from '../../hooks/hooks';
 import { fetchProductCardData, fetchReviewsList, fetchSimilarProductsList } from '../../store/api-actons';
 import ProductCardRate from '../../components/UI/product-card-rate/product-card-rate';
@@ -20,6 +21,8 @@ const Product = (): JSX.Element => {
   const data = useAppSelector((state) => state.productCard);
   const { name, previewImg, previewImg2x, previewImgWebp, previewImgWebp2x, price, rating, reviewCount, type, category, level } = data;
 
+  const [activeModal, setActiveModal] = useState({ addModal: false, succesModal: false });
+  const changeStatusModal = () => setActiveModal({ ...activeModal, addModal: !activeModal.addModal });
 
   const similarDataList : ProductType[] = useAppSelector((state) => state.similarProductList);
 
@@ -77,9 +80,10 @@ const Product = (): JSX.Element => {
             <SimilarProduct similarList={getSimilarList()} />
           </div>
           <div className="page-content__section">
-            <ReviewsList reviewsList = {reviewsList} />
+            <ReviewsList handleButtonAddReviewClick={changeStatusModal} reviewsList = {reviewsList} />
           </div>
         </div>
+        <ModalReviewForm isActive={activeModal.addModal} handleButtonCloseClick={changeStatusModal} />
       </main>
       <a className="up-btn" href="#header" >
         <svg width="12" height="18" aria-hidden="true">

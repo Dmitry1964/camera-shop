@@ -74,4 +74,36 @@ export const magicNumbers = {
   showReviewStep: 3,
 };
 
+export const ratingStars = [
+  {
+    id: 'star-5',
+    title: 'Отлично',
+    value: '5'
+  },
+
+  {
+    id: 'star-4',
+    title: 'Хорошо',
+    value: '4'
+  },
+
+  {
+    id: 'star-3',
+    title: 'Нормально',
+    value: '3'
+  },
+
+  {
+    id: 'star-2',
+    title: 'Плохо',
+    value: '2'
+  },
+
+  {
+    id: 'star-1',
+    title: 'Ужасно',
+    value: '1'
+  },
+];
+
 export const months = ['Январь', 'Февраль', 'Март', 'Апрель', 'Май', 'Июнь', 'Июль', 'Август', 'Сентябрь', 'Октябрь', 'Ноябрь', 'Декабрь'];
