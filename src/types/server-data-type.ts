@@ -38,7 +38,7 @@ export type ReviewType = {
 };
 
 export type UserReviewType = {
-  id: number;
+  cameraId: number;
   userName: string;
   advantage: string;
   disadvantage: string;

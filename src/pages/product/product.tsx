@@ -6,11 +6,11 @@ import ReviewsList from '../../components/reviews-list/reviews-list';
 import SimilarProduct from '../../components/similar-product/similar-product';
 import ModalReviewForm from '../../components/modal-review-form/modal-review-form';
 import { useParams } from 'react-router-dom';
-import { useEffect, useState} from 'react';
+import { useEffect, useState } from 'react';
 import { useAppDispatch, useAppSelector } from '../../hooks/hooks';
-import { fetchProductCardData, fetchReviewsList, fetchSimilarProductsList } from '../../store/api-actons';
+import { fetchProductCardData, fetchReviewsList, fetchSimilarProductsList, addReviewToServer } from '../../store/api-actons';
 import ProductCardRate from '../../components/UI/product-card-rate/product-card-rate';
-import { ProductType } from '../../types/server-data-type';
+import { ProductType, UserReviewType } from '../../types/server-data-type';
 import { RequestStatus } from '../../constants/const';
 
 
@@ -24,16 +24,17 @@ const Product = (): JSX.Element => {
   const [activeModal, setActiveModal] = useState({ addModal: false, succesModal: false });
   const changeStatusModal = () => setActiveModal({ ...activeModal, addModal: !activeModal.addModal });
 
-  const similarDataList : ProductType[] = useAppSelector((state) => state.similarProductList);
+
+  const similarDataList: ProductType[] = useAppSelector((state) => state.similarProductList);
 
   const loadStatus = useAppSelector((state) => state.loadSimilarListStatus);
   const reviewsList = useAppSelector((state) => state.reviewsList);
 
   const getSimilarList = () => {
-    const similarList : ProductType[] = [];
-    if(loadStatus === RequestStatus.Success) {
+    const similarList: ProductType[] = [];
+    if (loadStatus === RequestStatus.Success) {
       similarDataList.forEach((item) => {
-        if(item.level === level && item.category === category && item.type === type) {
+        if (item.level === level && item.category === category && item.type === type) {
           similarList.push(item);
         }
       });
@@ -41,11 +42,18 @@ const Product = (): JSX.Element => {
     return similarList;
   };
 
+  const setUserReview = (formData: UserReviewType) => {
+    formData.cameraId = id;
+    dispatch(addReviewToServer(formData))
+      .then(() => dispatch(fetchReviewsList(id)));
+  };
+
   useEffect(() => {
     dispatch(fetchProductCardData(id))
       .then(() => dispatch(fetchSimilarProductsList(id)))
       .then(() => dispatch(fetchReviewsList(id)));
   }, [id, dispatch]);
+
 
   return (
     <div className="wrapper">
@@ -80,10 +88,10 @@ const Product = (): JSX.Element => {
             <SimilarProduct similarList={getSimilarList()} />
           </div>
           <div className="page-content__section">
-            <ReviewsList handleButtonAddReviewClick={changeStatusModal} reviewsList = {reviewsList} />
+            <ReviewsList handleButtonAddReviewClick={changeStatusModal} reviewsList={reviewsList} />
           </div>
         </div>
-        <ModalReviewForm isActive={activeModal.addModal} handleButtonCloseClick={changeStatusModal} />
+        <ModalReviewForm isActive={activeModal.addModal} handleButtonCloseClick={changeStatusModal} setUserReview={setUserReview} />
       </main>
       <a className="up-btn" href="#header" >
         <svg width="12" height="18" aria-hidden="true">

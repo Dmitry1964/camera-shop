@@ -1,7 +1,7 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { State, AppDispatch } from '../types/store-type';
 import { AxiosInstance } from 'axios';
-import { ProductType, PromoOfferType, ReviewType } from '../types/server-data-type';
+import { ProductType, PromoOfferType, ReviewType, UserReviewType } from '../types/server-data-type';
 import { RequestRoute } from '../constants/const';
 import {
   LoadSimilarProductList,
@@ -9,6 +9,7 @@ import {
   loadProductsList,
   loadPromoOffersList,
   loadReviewsList,
+  addUserReview,
 } from './actions';
 
 export const fetchProductsList = createAsyncThunk<
@@ -81,4 +82,17 @@ export const fetchReviewsList = createAsyncThunk<
   >('data/fetchReviewsList', async(idProduct, {dispatch, extra: api}) => {
     const {data} = await api.get<ReviewType[]>(`${RequestRoute.Cameras}/${idProduct}${RequestRoute.Reviews}`);
     dispatch(loadReviewsList(data));
+  });
+
+export const addReviewToServer = createAsyncThunk<
+  void,
+  UserReviewType,
+  {
+    dispatch: AppDispatch;
+    state: State;
+    extra: AxiosInstance;
+  }
+  >('data/addReview', async(reviewData, {dispatch, extra: api}) => {
+    const {data} = await api.post<ReviewType>(RequestRoute.Reviews, reviewData);
+    dispatch(addUserReview(data));
   });

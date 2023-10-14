@@ -13,8 +13,9 @@ import {
   loadProductsList,
   loadPromoOffersList,
   loadReviewsList,
+  addUserReview,
 } from './actions';
-import { fetchProductsList, fetchReviewsList, fetchSimilarProductsList } from './api-actons';
+import { fetchProductCardData, fetchProductsList, fetchReviewsList, fetchSimilarProductsList } from './api-actons';
 
 const initialState: StoreType = {
   productsList: [],
@@ -57,6 +58,18 @@ const initialState: StoreType = {
   loadProductListStatus: RequestStatus.Idle,
   loadSimilarListStatus: RequestStatus.Idle,
   loadReviewsListStatus: RequestStatus.Idle,
+  loadProductCardStatus: RequestStatus.Idle,
+  userReview: {
+    id: '',
+    createAt: '',
+    cameraId: 0,
+    userName: '',
+    advantage: '',
+    disadvantage: '',
+    review: '',
+    rating: 0,
+
+  }
 };
 
 const reducer = createReducer(initialState, (builder) => {
@@ -86,7 +99,7 @@ const reducer = createReducer(initialState, (builder) => {
   });
 
 
-  // загрузка спмска промо предложений
+  // загрузка списка промо предложений
   builder.addCase(loadPromoOffersList, (state, action) => {
     state.promoOffersList = action.payload;
   });
@@ -95,6 +108,13 @@ const reducer = createReducer(initialState, (builder) => {
   builder.addCase(loadProductData, (state, action) => {
     state.productCard = action.payload;
   });
+  builder.addCase(fetchProductCardData.pending, (state) => {
+    state.loadProductCardStatus = RequestStatus.Pending;
+  });
+  builder.addCase(fetchProductCardData.fulfilled, (state) => {
+    state.loadProductCardStatus = RequestStatus.Success;
+  });
+
 
   // загрузка списка отзывов
   builder.addCase(loadReviewsList, (state, action) => {
@@ -111,6 +131,11 @@ const reducer = createReducer(initialState, (builder) => {
   // выбраннфй для покупки товар
   builder.addCase(selectedProductBasket, (state, action) => {
     state.selectedProduct = action.payload;
+  });
+
+  // добавления review на сервер
+  builder.addCase(addUserReview, (state, action) => {
+    state.userReview = action.payload;
   });
 
 });

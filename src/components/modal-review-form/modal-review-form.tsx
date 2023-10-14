@@ -7,11 +7,13 @@ import cn from 'classnames';
 type ModalReviewFormType = {
   isActive: boolean;
   handleButtonCloseClick: () => void;
+  setUserReview: (formData : UserReviewType) => void;
 }
 
-const ModalReviewForm = ({ isActive, handleButtonCloseClick }: ModalReviewFormType): JSX.Element => {
-  const [formData, setFormData] = useState<UserReviewType>({
-    id: 0,
+const ModalReviewForm = ({ isActive, handleButtonCloseClick, setUserReview }: ModalReviewFormType): JSX.Element => {
+
+  const [formData, setFormData] = useState({
+    cameraId: 0,
     userName: '',
     advantage: '',
     disadvantage: '',
@@ -19,8 +21,15 @@ const ModalReviewForm = ({ isActive, handleButtonCloseClick }: ModalReviewFormTy
     rating: 0,
   });
 
+
   const handleInputFieldChange = (rating: string) => {
     setFormData({ ...formData, rating: parseInt(rating, 10) });
+  };
+
+  const handleFormSubmit = (evt:React.FormEvent<HTMLFormElement>) => {
+    evt.preventDefault();
+    setUserReview(formData);
+    handleButtonCloseClick();
   };
 
   useEffect(() => {
@@ -44,7 +53,10 @@ const ModalReviewForm = ({ isActive, handleButtonCloseClick }: ModalReviewFormTy
         <div className="modal__content" onClick={(evt) => evt.stopPropagation()}>
           <p className="title title--h4">Оставить отзыв</p>
           <div className="form-review">
-            <form method="post">
+            <form
+              onSubmit={(evt) => handleFormSubmit(evt)}
+              method="post"
+            >
               <div className="form-review__rate">
                 <fieldset className="rate form-review__item">
                   <legend className="rate__caption">Рейтинг

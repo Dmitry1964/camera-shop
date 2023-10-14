@@ -29,6 +29,7 @@ export const ActionsNames = {
   CheckSimilarListStatus: 'similarListStatus/check',
   SelectedProductBasket: 'productBasket/selected',
   AddProductBasket: 'productBasket/add',
+  AddReview: 'review/add',
 } as const;
 
 export enum PageRoute {
