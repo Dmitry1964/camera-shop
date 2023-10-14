@@ -84,7 +84,7 @@ export const fetchReviewsList = createAsyncThunk<
     dispatch(loadReviewsList(data));
   });
 
-export const addReviewToServer = createAsyncThunk<
+export const fetchUserRevieData = createAsyncThunk<
   void,
   UserReviewType,
   {

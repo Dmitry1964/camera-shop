@@ -8,7 +8,7 @@ import ModalReviewForm from '../../components/modal-review-form/modal-review-for
 import { useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { useAppDispatch, useAppSelector } from '../../hooks/hooks';
-import { fetchProductCardData, fetchReviewsList, fetchSimilarProductsList, addReviewToServer } from '../../store/api-actons';
+import { fetchProductCardData, fetchReviewsList, fetchSimilarProductsList, fetchUserRevieData } from '../../store/api-actons';
 import ProductCardRate from '../../components/UI/product-card-rate/product-card-rate';
 import { ProductType, UserReviewType } from '../../types/server-data-type';
 import { RequestStatus } from '../../constants/const';
@@ -44,7 +44,7 @@ const Product = (): JSX.Element => {
 
   const setUserReview = (formData: UserReviewType) => {
     formData.cameraId = id;
-    dispatch(addReviewToServer(formData))
+    dispatch(fetchUserRevieData(formData))
       .then(() => dispatch(fetchReviewsList(id)));
   };
 
