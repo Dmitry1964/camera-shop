@@ -25,7 +25,7 @@ const Pagination = ({ totalCards, limit, cahgePageCards }: PaginationProps): JSX
   };
   const handlerButtonClick = (evt: MouseEvent<HTMLAnchorElement>) => {
     evt.preventDefault();
-    const buttonName = evt.target.textContent;
+    const buttonName = (evt.target.textContent) as string;
     const start = pageCurrent.start + magicNumbers.paginationItemsOnPage;
     const end = pageCurrent.end + magicNumbers.paginationItemsOnPage;
     if (buttonName === PaginationButtons.Next) {

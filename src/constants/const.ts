@@ -35,6 +35,7 @@ export const ActionsNames = {
 export enum PageRoute {
   Catalog = '/',
   Product= '/cameras',
+  PageNotFound = '*',
 }
 
 export enum RequestRoute {
