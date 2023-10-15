@@ -11,7 +11,6 @@ const App = (): JSX.Element => (
       <Route path={PageRoute.Product} element={<Product />}>
         <Route path=':camerasId' element={<Product />} />
         <Route path=':camerasId/:param' element={<Product/>} />
-        {/* <Route path=':camerasId/:desc' element={<Product/>} /> */}
       </Route>
       <Route path={PageRoute.PageNotFound} element={<PageNotFound />} />
     </Routes>

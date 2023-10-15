@@ -17,6 +17,7 @@ const Breadcrumbs = (): JSX.Element => {
   const routes: RoutesType[] = [
     { path: PageRoute.Catalog, breadcrumb: 'Каталог' },
     { path: `${PageRoute.Product}`, breadcrumb: ' ' },
+    // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
     { path: `${PageRoute.Product}/${camerasId}`, breadcrumb: `${name}` },
   ];
 
