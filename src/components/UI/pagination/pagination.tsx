@@ -1,7 +1,7 @@
 import { MouseEvent, useState } from 'react';
 import { totalPages } from '../../../utils/utils';
 import cn from 'classnames';
-import { Link } from 'react-router-dom';
+import { Link, useSearchParams } from 'react-router-dom';
 import { magicNumbers, PaginationButtons } from '../../../constants/const';
 
 
@@ -13,13 +13,16 @@ type PaginationProps = {
 
 const Pagination = ({ totalCards, limit, cahgePageCards }: PaginationProps): JSX.Element => {
 
-  const [page, setPage] = useState(magicNumbers.firstPage);
+  const [searchParams, setSearchParams] = useSearchParams({page: '1'});
+  const pageNumber = Number(searchParams.get('page'));
+  const [page, setPage] = useState(pageNumber);
   const [pageCurrent, setPageCurrent] = useState({ start: 0, end: magicNumbers.paginationItemsOnPage });
 
   const itemsPagination = totalPages(totalCards, limit).slice(pageCurrent.start, pageCurrent.end);
 
   const handlePaginationItemClick = (evt: MouseEvent<HTMLAnchorElement>, item: number) => {
     evt.preventDefault();
+    setSearchParams({page: item.toString()});
     setPage(item);
     cahgePageCards(item);
   };

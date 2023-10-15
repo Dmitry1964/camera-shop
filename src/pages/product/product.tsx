@@ -15,6 +15,7 @@ import { RequestStatus } from '../../constants/const';
 
 
 const Product = (): JSX.Element => {
+
   const { camerasId } = useParams();
   const id = Number(camerasId);
   const dispatch = useAppDispatch();

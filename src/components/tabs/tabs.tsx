@@ -1,6 +1,8 @@
 import { useState } from 'react';
 import cn from 'classnames';
 import { ProductType } from '../../types/server-data-type';
+import { Link } from 'react-router-dom';
+import { TabsButton } from '../../constants/const';
 
 type TabsProps = {
   data: ProductType;
@@ -8,31 +10,26 @@ type TabsProps = {
 
 const Tabs = ({data} : TabsProps): JSX.Element => {
 
-  const [spec, setSpec] = useState(true);
-  const [desc, setDesc] = useState(false);
-  const handleTabButtonClick = () => {
-    setSpec(!spec);
-    setDesc(!desc);
-  };
-  const {vendorCode, category, type, level, description} = data;
+  const [param, setParam] = useState(TabsButton.Spec);
+  const {vendorCode, category, type, level, description, id} = data;
   return (
     <div className="tabs product__tabs">
       <div className="tabs__controls product__tabs-controls">
-        <button
-          onClick={handleTabButtonClick}
-          className={cn('tabs__control', { 'is-active': spec })}
+        <Link to ={`${id}/spec`}
+          onClick={() => setParam(TabsButton.Spec)}
+          className={cn('tabs__control', { 'is-active': param === TabsButton.Spec })}
           type="button"
         >Характеристики
-        </button>
-        <button
-          onClick={handleTabButtonClick}
-          className={cn('tabs__control', { 'is-active': desc })}
+        </Link>
+        <Link to ={`${id}/desc`}
+          onClick={() => setParam(TabsButton.Desc)}
+          className={cn('tabs__control', { 'is-active': param === TabsButton.Desc })}
           type="button"
         >Описание
-        </button>
+        </Link>
       </div>
       <div className="tabs__content">
-        <div className={cn('tabs__element', {'is-active': spec})}>
+        <div className={cn('tabs__element', {'is-active': param === TabsButton.Spec})}>
           <ul className="product__tabs-list">
             <li className="item-list"><span className="item-list__title">Артикул:</span>
               <p className="item-list__text">{vendorCode}</p>
@@ -48,7 +45,7 @@ const Tabs = ({data} : TabsProps): JSX.Element => {
             </li>
           </ul>
         </div>
-        <div className={cn('tabs__element', {'is-active': desc})}>
+        <div className={cn('tabs__element', {'is-active': param === TabsButton.Desc})}>
           <div className="product__tabs-text">{description}</div>
         </div>
       </div>

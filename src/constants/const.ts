@@ -63,6 +63,11 @@ export enum PaginationButtons {
   Prev = 'Назад',
 }
 
+export enum TabsButton {
+  Spec = 'spec',
+  Desc = 'desc',
+}
+
 export const BACKEND_URL = 'https://camera-shop.accelerator.pages.academy';
 
 export const REQUEST_TIMEOUT = 3000;
