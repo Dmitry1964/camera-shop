@@ -5,9 +5,21 @@ import Header from 'src/widgest/header/header';
 import Banner from 'src/widgest/banner/banner';
 import Breadcrumbs from 'src/features/breadcrumbs/breadcrumbs';
 import Footer from 'src/widgest/footer/footer';
+import { useAppDispatch, useAppSelector } from 'src/shared/hooks/hooks';
+import { useEffect } from 'react';
+import { fetchCamerasAll } from 'src/app/store/app-actions';
+import { FetchStatus } from 'src/shared/constans/requestData';
 
 const Catalog = (): JSX.Element => {
-  const a = 2;
+  const dispatch = useAppDispatch();
+  const status = useAppSelector((state) => state.productList.status);
+
+  useEffect(() => {
+    if (status === FetchStatus.Idle) {
+      dispatch(fetchCamerasAll());
+    }
+  }, [status, dispatch]);
+
   return (
     <div className="wrapper">
       <Header />

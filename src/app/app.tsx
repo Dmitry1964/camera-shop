@@ -1,22 +1,22 @@
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import Catalog from 'src/pages/catalog';
 import Product from 'src/pages/product';
-import {RoutesPaths} from 'src/app/routes/routes';
+import {AppRoutes} from 'src/shared/constans/routes';
 import Basket from 'src/pages/basket';
 
 const App = () => {
 
   const router = createBrowserRouter([
     {
-      path: RoutesPaths.main,
+      path: AppRoutes.Main,
       element: <Catalog />,
     },
     {
-      path: RoutesPaths.product,
+      path: AppRoutes.Product,
       element: <Product />,
     },
     {
-      path: RoutesPaths.basket,
+      path: AppRoutes.Basket,
       element: <Basket />
     }
   ]);
