@@ -1,10 +1,10 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { fetchCamerasAll } from 'src/app/store/app-actions';
-import { ProductsList } from 'src/app/types/productType';
+import { ProductTypes} from 'src/app/types/productType';
 import { FetchStatus } from 'src/shared/constans/requestData';
 
 interface ProductsState {
-  products: ProductsList;
+  products: ProductTypes[];
   status: FetchStatus;
 }
 

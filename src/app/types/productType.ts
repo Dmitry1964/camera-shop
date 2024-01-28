@@ -33,4 +33,4 @@ enum ProductLevel {
   hard = 'Профессиональный'
 }
 
-export type ProductsList = ProductType[];
+// export type ProductsList = ProductType[];
