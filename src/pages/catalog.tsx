@@ -7,18 +7,23 @@ import Breadcrumbs from 'src/features/breadcrumbs/breadcrumbs';
 import Footer from 'src/widgest/footer/footer';
 import { useAppDispatch, useAppSelector } from 'src/shared/hooks/hooks';
 import { useEffect } from 'react';
-import { fetchCamerasAll } from 'src/app/store/app-actions';
+import { fetchCamerasAll, fetchPromoProduct } from 'src/app/store/app-actions';
 import { FetchStatus } from 'src/shared/constans/requestData';
 
 const Catalog = (): JSX.Element => {
   const dispatch = useAppDispatch();
   const status = useAppSelector((state) => state.productList.status);
+  const statusPromo = useAppSelector((state) => state.banner.status);
 
   useEffect(() => {
     if (status === FetchStatus.Idle) {
       dispatch(fetchCamerasAll());
     }
-  }, [status, dispatch]);
+    if (statusPromo === FetchStatus.Idle) {
+      dispatch(fetchPromoProduct());
+    }
+  }, [status, statusPromo, dispatch]);
+
 
   return (
     <div className="wrapper">

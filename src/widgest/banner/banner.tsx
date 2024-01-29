@@ -1,14 +1,33 @@
+import { FetchStatus } from 'src/shared/constans/requestData';
+import { useAppSelector } from 'src/shared/hooks/hooks';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import 'swiper/css';
+import 'swiper/css/autoplay';
+import { Autoplay } from 'swiper/modules';
 
-const Banner = () => {
-  const a = 2;
+
+const Banner = (): JSX.Element => {
+  const promoProducts = useAppSelector((state) => state.banner.promoProduct);
+  const status = useAppSelector((state) => state.banner.status);
   return (
-    <div className="banner">
-      <picture>
-        <source type="image/webp" srcSet="img/content/banner-bg.webp, img/content/banner-bg@2x.webp 2x" />
-        <img src="img/content/banner-bg.jpg" srcSet="img/content/banner-bg@2x.jpg 2x" width="1280" height="280" alt="баннер" />
-      </picture>
-      <p className="banner__info"><span className="banner__message">Новинка!</span><span className="title title--h1">Cannonball&nbsp;Pro&nbsp;MX&nbsp;8i</span><span className="banner__text">Профессиональная камера от&nbsp;известного производителя</span><a className="btn" href="#">Подробнее</a></p>
-    </div>
+    <Swiper
+      modules={[Autoplay]}
+      loop
+      autoplay={{delay: 3000}}
+    >
+      {status === FetchStatus.Fulfilled && promoProducts.map((item) => (
+        <SwiperSlide key={item.id}>
+          <div className="banner">
+            <picture>
+              <source type="image/webp" srcSet={`${item.previewImgWebp}, ${item.previewImgWebp2x}`} />
+              <img src={item.previewImg} srcSet={item.previewImg2x} width="1280" height="280" alt="баннер" />
+            </picture>
+            <p className="banner__info"><span className="banner__message">Новинка!</span><span className="title title--h1">{item.name}</span><span className="banner__text">Профессиональная камера от&nbsp;известного производителя</span><a className="btn" href="#">Подробнее</a></p>
+          </div>
+
+        </SwiperSlide>
+      ))}
+    </Swiper>
   );
 };
 

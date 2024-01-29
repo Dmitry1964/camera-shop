@@ -5,5 +5,6 @@ export enum AppRoutes {
 }
 
 export enum FetchRoutes {
-  Cameras = '/cameras'
+  Cameras = '/cameras',
+  Promo = '/promo'
 }

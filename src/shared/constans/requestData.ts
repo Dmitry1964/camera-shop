@@ -8,3 +8,8 @@ export enum FetchStatus {
   Fulfilled = 'succes',
   Rejected = 'error'
 }
+
+export enum ApiActions {
+  DataFetchCameras = 'data/fetchCameras',
+  DataFetchPromo = 'data/fetchPromo',
+}

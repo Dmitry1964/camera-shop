@@ -1,8 +1,10 @@
 import { combineReducers, configureStore } from '@reduxjs/toolkit';
 import productList from 'src/app/reducers/products-list/productsListSlice';
+import banner from 'src/app/reducers/banner/bannerSlice';
 
 const rootReducer = combineReducers({
-  productList
+  productList,
+  banner
 });
 
 export const store = configureStore({
