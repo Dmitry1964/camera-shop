@@ -7,13 +7,14 @@ import { Autoplay } from 'swiper/modules';
 
 
 const Banner = (): JSX.Element => {
+  const delay = 3000;
   const promoProducts = useAppSelector((state) => state.banner.promoProduct);
   const status = useAppSelector((state) => state.banner.status);
   return (
     <Swiper
       modules={[Autoplay]}
       loop
-      autoplay={{delay: 3000}}
+      autoplay={{delay: delay}}
     >
       {status === FetchStatus.Fulfilled && promoProducts.map((item) => (
         <SwiperSlide key={item.id}>

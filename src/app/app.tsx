@@ -14,7 +14,7 @@ const App = () => {
       errorElement: <ErrorPage />
     },
     {
-      path: AppRoutes.Product,
+      path: '/product/:prod',
       element: <Product />,
     },
     {

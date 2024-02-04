@@ -1,17 +1,16 @@
-import { ProductTypes} from 'src/app/types/productType';
+import { ProductTypes } from 'src/app/types/productType';
 import ProductCard from 'src/features/product-card/product-card';
-import { useAppSelector } from 'src/shared/hooks/hooks';
 
+type CamerasListProp = {
+  camerasList: ProductTypes[];
+}
 
-const  CamerasList = (): JSX.Element => {
-  const cameras = useAppSelector((state) => state.productList.products);
-  return (
-    <div className="cards catalog__cards">
-      {cameras && cameras.map((item) => (
-        <ProductCard key={item.id} data = {item} />
-      ))}
-    </div>
-  );
-};
+const CamerasList = ({ camerasList }: CamerasListProp): JSX.Element => (
+  <div className="cards catalog__cards">
+    {camerasList && camerasList.map((item) => (
+      <ProductCard key={item.id} data={item} />
+    ))}
+  </div>
+);
 
 export default CamerasList;

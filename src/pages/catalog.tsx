@@ -9,11 +9,16 @@ import { useAppDispatch, useAppSelector } from 'src/shared/hooks/hooks';
 import { useEffect } from 'react';
 import { fetchCamerasAll, fetchPromoProduct } from 'src/app/store/app-actions';
 import { FetchStatus } from 'src/shared/constans/requestData';
+import usePagination from 'src/shared/hooks/hooks';
+import Pagination from 'src/features/pagination/pagination';
+import { PAGE_LIMIT } from 'src/shared/constans/others';
 
 const Catalog = (): JSX.Element => {
   const dispatch = useAppDispatch();
   const status = useAppSelector((state) => state.productList.status);
   const statusPromo = useAppSelector((state) => state.banner.status);
+  const products = useAppSelector((state) => state.productList.products);
+
 
   useEffect(() => {
     if (status === FetchStatus.Idle) {
@@ -24,6 +29,9 @@ const Catalog = (): JSX.Element => {
     }
   }, [status, statusPromo, dispatch]);
 
+  const {pageCount, pageData, pageNumber, setPageNumber, paginationItems} = usePagination({items : products, pageLimit: PAGE_LIMIT});
+
+  const camerasList = pageData();
 
   return (
     <div className="wrapper">
@@ -39,19 +47,8 @@ const Catalog = (): JSX.Element => {
                 <CatalogFilter />
                 <div className="catalog__content">
                   <CatalogSort />
-                  <CamerasList />
-                  <div className="pagination">
-                    <ul className="pagination__list">
-                      <li className="pagination__item"><a className="pagination__link pagination__link--active" href="1">1</a>
-                      </li>
-                      <li className="pagination__item"><a className="pagination__link" href="2">2</a>
-                      </li>
-                      <li className="pagination__item"><a className="pagination__link" href="3">3</a>
-                      </li>
-                      <li className="pagination__item"><a className="pagination__link pagination__link--text" href="2">Далее</a>
-                      </li>
-                    </ul>
-                  </div>
+                  {products && <CamerasList camerasList = {camerasList} />}
+                  {products && <Pagination pageNumber = {pageNumber} changePage = {setPageNumber} pageCount = {pageCount} paginationItems={paginationItems} />}
                 </div>
               </div>
             </div>
