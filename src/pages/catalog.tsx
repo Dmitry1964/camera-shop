@@ -29,7 +29,7 @@ const Catalog = (): JSX.Element => {
     }
   }, [status, statusPromo, dispatch]);
 
-  const {pageCount, pageData, pageNumber, setPageNumber, paginationItems} = usePagination({items : products, pageLimit: PAGE_LIMIT});
+  const {pageData, pageNumber, setPageNumber, paginationItems} = usePagination({items : products, pageLimit: PAGE_LIMIT});
 
   const camerasList = pageData();
 
@@ -48,7 +48,7 @@ const Catalog = (): JSX.Element => {
                 <div className="catalog__content">
                   <CatalogSort />
                   {products && <CamerasList camerasList = {camerasList} />}
-                  {products && <Pagination pageNumber = {pageNumber} changePage = {setPageNumber} pageCount = {pageCount} paginationItems={paginationItems} />}
+                  {products && <Pagination pageNumber = {pageNumber} changePage = {setPageNumber} paginationItems={paginationItems} />}
                 </div>
               </div>
             </div>

@@ -12,4 +12,6 @@ export enum FetchStatus {
 export enum ApiActions {
   DataFetchCameras = 'data/fetchCameras',
   DataFetchPromo = 'data/fetchPromo',
+  DataFetchProduct = 'data/fetchProduct',
+  DataFetchSimilarProducts = 'data/fetchSimilarProducts',
 }

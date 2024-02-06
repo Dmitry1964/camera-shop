@@ -3,7 +3,7 @@ import { fetchCamerasAll } from 'src/app/store/app-actions';
 import { ProductTypes} from 'src/app/types/productType';
 import { FetchStatus } from 'src/shared/constans/requestData';
 
-interface ProductsState {
+export interface ProductsState {
   products: ProductTypes[];
   status: FetchStatus;
 }

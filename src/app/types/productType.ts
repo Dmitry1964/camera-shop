@@ -15,22 +15,25 @@ export interface ProductTypes {
     previewImgWebp2x: string;
 }
 
-enum ProductType {
+export enum ProductType {
   collectible = 'Коллекционная',
   instatn = 'Моментальная',
   digital = 'Цифровая',
-  analog = 'Пленочная'
+  analog = 'Пленочная',
+  none = ''
 }
 
-enum ProductCategory {
+export enum ProductCategory {
   video = 'Видеокамера',
-  photo = 'Фотоаппарат'
+  photo = 'Фотоаппарат',
+  none = '',
 }
 
-enum ProductLevel {
+export enum ProductLevel {
   soft = 'Нулевой',
   middle = 'Любительский',
-  hard = 'Профессиональный'
+  hard = 'Профессиональный',
+  none = ''
 }
 
 export interface PromoProduct {

@@ -15,3 +15,13 @@ export const fetchPromoProduct = createAsyncThunk(ApiActions.DataFetchPromo, asy
   const {data} = await api.get<PromoProduct[]>(FetchRoutes.Promo);
   return data;
 });
+
+export const fetchProduct = createAsyncThunk(ApiActions.DataFetchProduct, async (id : number) => {
+  const {data} = await api.get<ProductTypes>(`${FetchRoutes.Cameras}/${id}`);
+  return data;
+});
+
+export const fetchSimilarProducts = createAsyncThunk(ApiActions.DataFetchSimilarProducts, async (id : number) => {
+  const {data} = await api.get<ProductTypes[]>(`${FetchRoutes.Cameras}/${id}${FetchRoutes.Similar}`);
+  return data;
+});

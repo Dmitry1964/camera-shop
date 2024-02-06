@@ -4,17 +4,20 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import 'swiper/css/autoplay';
 import { Autoplay } from 'swiper/modules';
+import { Link } from 'react-router-dom';
+import { AppRoutes } from 'src/shared/constans/routes';
 
 
 const Banner = (): JSX.Element => {
   const delay = 3000;
   const promoProducts = useAppSelector((state) => state.banner.promoProduct);
   const status = useAppSelector((state) => state.banner.status);
+
   return (
     <Swiper
       modules={[Autoplay]}
       loop
-      autoplay={{delay: delay}}
+      autoplay={{ delay: delay }}
     >
       {status === FetchStatus.Fulfilled && promoProducts.map((item) => (
         <SwiperSlide key={item.id}>
@@ -23,9 +26,13 @@ const Banner = (): JSX.Element => {
               <source type="image/webp" srcSet={`${item.previewImgWebp}, ${item.previewImgWebp2x}`} />
               <img src={item.previewImg} srcSet={item.previewImg2x} width="1280" height="280" alt="баннер" />
             </picture>
-            <p className="banner__info"><span className="banner__message">Новинка!</span><span className="title title--h1">{item.name}</span><span className="banner__text">Профессиональная камера от&nbsp;известного производителя</span><a className="btn" href="#">Подробнее</a></p>
+            <p className="banner__info">
+              <span className="banner__message">Новинка!</span>
+              <span className="title title--h1">{item.name}</span>
+              <span className="banner__text">Профессиональная камера от&nbsp;известного производителя</span>
+              <Link className="btn" to={`${AppRoutes.Product}/${item.id}`}>Подробнее</Link>
+            </p>
           </div>
-
         </SwiperSlide>
       ))}
     </Swiper>

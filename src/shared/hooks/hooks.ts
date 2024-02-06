@@ -13,7 +13,6 @@ type UsePaginationProps = {
 
 const usePagination = ({ items, pageLimit }: UsePaginationProps) => {
   const [pageNumber, setPageNumber] = useState(0);
-  // const [paginationItems, setPaginationItems] = useState([1, 2, 3]);
   const pageCount = Math.ceil(items.length / pageLimit);
   const pageData = (): ProductTypes[] => {
     const startIndex = pageNumber * pageLimit;

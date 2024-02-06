@@ -5,11 +5,10 @@ type PaginationProps = {
   pageNumber: number;
   paginationItems: number[];
   changePage: (pN: number) => void;
-  pageCount: number;
 }
 
 
-const Pagination = ({ pageNumber, paginationItems, changePage, pageCount }: PaginationProps) => {
+const Pagination = ({ pageNumber, paginationItems, changePage}: PaginationProps) => {
 
   const handlerChangePageBtn = (evt: MouseEvent<HTMLAnchorElement, globalThis.MouseEvent>) => {
     evt.preventDefault();
@@ -28,14 +27,14 @@ const Pagination = ({ pageNumber, paginationItems, changePage, pageCount }: Pagi
   return (
     <div className="pagination">
       <ul className="pagination__list">
-        <li className="pagination__item"><a className="pagination__link pagination__link--text visually-hidden" href="2">Назад</a>
+        <li className="pagination__item visually-hidden"><a className="pagination__link pagination__link--text" href="2">Назад</a>
         </li>
         {paginationItems && paginationItems.map((item, index) => (
           <li className="pagination__item" key={item}>
             <a onClick={(evt) => handlerChangePageBtn(evt)} className={cn('pagination__link', { 'pagination__link--active': pageNumber === index})} href="1">{item}</a>
           </li>
         ))}
-        <li className="pagination__item"><a onClick={(evt) => handlerNextPageBtn(evt)} className="pagination__link pagination__link--text" href="2">Далее</a>
+        <li className="pagination__item visually-hidden"><a onClick={(evt) => handlerNextPageBtn(evt)} className="pagination__link pagination__link--text" href="2">Далее</a>
         </li>
       </ul>
     </div>
