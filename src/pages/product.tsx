@@ -19,6 +19,7 @@ const Product = () => {
   const { name, previewImg, previewImg2x, previewImgWebp, previewImgWebp2x, rating, reviewCount, price, vendorCode, category, level, type, description } = useAppSelector((state) => state.product.product);
   const similarList = useAppSelector((state) => state.similarProducts.products);
 
+
   useEffect(() => {
     if (fetchProductsStatus === FetchStatus.Idle) {
       dispatch(fetchProduct(id));
@@ -28,6 +29,7 @@ const Product = () => {
     }
 
   }, [dispatch, fetchProductsStatus, id, fetchSimilarStatus]);
+
 
   return (
     <div className="wrapper">
@@ -91,7 +93,7 @@ const Product = () => {
             </section>
           </div>
           <div className="page-content__section">
-            {similarList.length > 0 && <ProductsSimilar similarList={similarList} />}
+            {<ProductsSimilar similarList={similarList} />}
           </div>
           <div className="page-content__section">
             <Reviews />

@@ -11,7 +11,15 @@ const initialState : ProductsState = {
 const similarProductSlice = createSlice({
   name: 'similar-products',
   initialState,
-  reducers: {},
+  reducers: {
+    changeFetchStatus: (state) => {
+      state.status = FetchStatus.Idle;
+    },
+
+    removeSimilarProducts: (state) => {
+      state.products = [];
+    }
+  },
   extraReducers(builder) {
     builder
       .addCase(fetchSimilarProducts.pending, (state) => {
@@ -29,5 +37,7 @@ const similarProductSlice = createSlice({
   },
 });
 
+
+export const {changeFetchStatus, removeSimilarProducts} = similarProductSlice.actions;
 
 export default similarProductSlice.reducer;

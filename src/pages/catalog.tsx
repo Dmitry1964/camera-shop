@@ -12,12 +12,14 @@ import { FetchStatus } from 'src/shared/constans/requestData';
 import usePagination from 'src/shared/hooks/hooks';
 import Pagination from 'src/features/pagination/pagination';
 import { PAGE_LIMIT } from 'src/shared/constans/others';
+import { changeFetchStatusProduct } from 'src/app/reducers/product/productSlice';
 
 const Catalog = (): JSX.Element => {
   const dispatch = useAppDispatch();
   const status = useAppSelector((state) => state.productList.status);
   const statusPromo = useAppSelector((state) => state.banner.status);
   const products = useAppSelector((state) => state.productList.products);
+  const fetchStatusProduct = useAppSelector((state) => state.product.status);
 
 
   useEffect(() => {
@@ -27,7 +29,11 @@ const Catalog = (): JSX.Element => {
     if (statusPromo === FetchStatus.Idle) {
       dispatch(fetchPromoProduct());
     }
-  }, [status, statusPromo, dispatch]);
+
+    if (fetchStatusProduct === FetchStatus.Fulfilled) {
+      dispatch(changeFetchStatusProduct());
+    }
+  }, [status, statusPromo, dispatch, fetchStatusProduct]);
 
   const {pageData, pageNumber, setPageNumber, paginationItems} = usePagination({items : products, pageLimit: PAGE_LIMIT});
 

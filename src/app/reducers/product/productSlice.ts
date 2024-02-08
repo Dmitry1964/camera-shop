@@ -32,6 +32,9 @@ const productSlice = createSlice({
   name: 'product',
   initialState,
   reducers: {
+    changeFetchStatusProduct: (state) => {
+      state.status = FetchStatus.Idle;
+    }
   },
   extraReducers(builder) {
     builder
@@ -50,5 +53,6 @@ const productSlice = createSlice({
   },
 });
 
+export const {changeFetchStatusProduct} = productSlice.actions;
 
 export default productSlice.reducer;
