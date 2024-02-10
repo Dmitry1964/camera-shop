@@ -1,5 +1,6 @@
 export enum AppRoutes {
   Main = '/',
+  Catalog = '/catalog',
   Product = 'product',
   Basket = '/basket'
 }

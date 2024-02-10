@@ -1,12 +1,14 @@
 import { ProductTypes } from 'src/app/types/productType';
 import StarsRating from '../rating/stars-rating';
+import { AppRoutes } from 'src/shared/constans/routes';
+import { Link } from 'react-router-dom';
 
 type ProductCardProps = {
   data: ProductTypes;
 }
 
 const ProductCard = ({data} : ProductCardProps) => {
-  const {previewImg, previewImg2x, previewImgWebp, previewImgWebp2x, rating, reviewCount, name, price} = data;
+  const {previewImg, previewImg2x, previewImgWebp, previewImgWebp2x, rating, reviewCount, name, price, id} = data;
   return (
     <div className="product-card">
       <div className="product-card__img">
@@ -29,8 +31,8 @@ const ProductCard = ({data} : ProductCardProps) => {
       <div className="product-card__buttons">
         <button className="btn btn--purple product-card__btn" type="button">Купить
         </button>
-        <a className="btn btn--transparent" href="#">Подробнее
-        </a>
+        <Link className="btn btn--transparent" to={`${AppRoutes.Product}/${id}`}>Подробнее
+        </Link>
       </div>
     </div>
   );

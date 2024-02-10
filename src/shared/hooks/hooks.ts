@@ -25,7 +25,7 @@ const usePagination = ({ items, pageLimit }: UsePaginationProps) => {
     paginationItems.push(i);
   }
 
-  return { pageNumber, pageCount, pageData, setPageNumber, paginationItems };
+  return { pageNumber, pageCount, pageData, setPageNumber, paginationItems};
 };
 
 export default usePagination;

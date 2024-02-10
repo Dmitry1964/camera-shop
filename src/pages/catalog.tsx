@@ -1,4 +1,3 @@
-import CamerasList from 'src/widgest/cameras/cameras-list';
 import CatalogFilter from 'src/features/catalog-filter/catalog-filter';
 import CatalogSort from 'src/features/catalog-sort/catalog-sort';
 import Header from 'src/widgest/header/header';
@@ -9,16 +8,13 @@ import { useAppDispatch, useAppSelector } from 'src/shared/hooks/hooks';
 import { useEffect } from 'react';
 import { fetchCamerasAll, fetchPromoProduct } from 'src/app/store/app-actions';
 import { FetchStatus } from 'src/shared/constans/requestData';
-import usePagination from 'src/shared/hooks/hooks';
-import Pagination from 'src/features/pagination/pagination';
-import { PAGE_LIMIT } from 'src/shared/constans/others';
 import { changeFetchStatusProduct } from 'src/app/reducers/product/productSlice';
+import { Outlet } from 'react-router-dom';
 
 const Catalog = (): JSX.Element => {
   const dispatch = useAppDispatch();
   const status = useAppSelector((state) => state.productList.status);
   const statusPromo = useAppSelector((state) => state.banner.status);
-  const products = useAppSelector((state) => state.productList.products);
   const fetchStatusProduct = useAppSelector((state) => state.product.status);
 
 
@@ -35,10 +31,6 @@ const Catalog = (): JSX.Element => {
     }
   }, [status, statusPromo, dispatch, fetchStatusProduct]);
 
-  const {pageData, pageNumber, setPageNumber, paginationItems} = usePagination({items : products, pageLimit: PAGE_LIMIT});
-
-  const camerasList = pageData();
-
   return (
     <div className="wrapper">
       <Header />
@@ -53,8 +45,7 @@ const Catalog = (): JSX.Element => {
                 <CatalogFilter />
                 <div className="catalog__content">
                   <CatalogSort />
-                  {products && <CamerasList camerasList = {camerasList} />}
-                  {products && <Pagination pageNumber = {pageNumber} changePage = {setPageNumber} paginationItems={paginationItems} />}
+                  <Outlet />
                 </div>
               </div>
             </div>
