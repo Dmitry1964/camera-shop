@@ -1,6 +1,6 @@
 import { ProductTypes } from 'src/app/types/productType';
-import { Swiper, SwiperSlide } from 'swiper/react';
-import {Navigation} from 'swiper/modules';
+import { Swiper, SwiperSlide, useSwiper } from 'swiper/react';
+import { Navigation } from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/css/navigation';
 import StarsRating from 'src/features/rating/stars-rating';
@@ -12,7 +12,32 @@ type ProductsSimilarProps = {
 
 const ProductsSimilar = ({ similarList }: ProductsSimilarProps) => {
 
-  const a = 2;
+  const SwiperNavigation = () => {
+    const swiper = useSwiper();
+
+    const slideNext = () => {
+      swiper.slideNext();
+    };
+
+    const slidePrev = () => {
+      swiper.slidePrev();
+    };
+    return (
+      <div className='navigation-btns'>
+        <button onClick={slidePrev} style={{ zIndex: 100, pointerEvents: 'all' }} className="slider-controls slider-controls--prev" type="button" aria-label="Предыдущий слайд">
+          <svg width="7" height="12" aria-hidden="true">
+            <use xlinkHref="#icon-arrow"></use>
+          </svg>
+        </button>
+        <button onClick={slideNext} style={{ zIndex: 100, pointerEvents: 'all' }} className="slider-controls slider-controls--next" type="button" aria-label="Следующий слайд">
+          <svg width="7" height="12" aria-hidden="true">
+            <use xlinkHref="#icon-arrow"></use>
+          </svg>
+        </button>
+      </div>
+    );
+  };
+
   return (
     <section className="product-similar">
       <div className="container">
@@ -21,7 +46,7 @@ const ProductsSimilar = ({ similarList }: ProductsSimilarProps) => {
           <Swiper
             modules={[Navigation]}
             slidesPerView={3}
-            navigation
+          // navigation
           >
             {similarList.map((item, index) => (
               <SwiperSlide key={item.id} virtualIndex={index}>
@@ -51,6 +76,7 @@ const ProductsSimilar = ({ similarList }: ProductsSimilarProps) => {
                 </div>
               </SwiperSlide>
             ))}
+            <SwiperNavigation />
           </Swiper>
           {/* <button className="slider-controls slider-controls--prev" type="button" aria-label="Предыдущий слайд" disabled>
             <svg width="7" height="12" aria-hidden="true">
